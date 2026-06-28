@@ -39,6 +39,22 @@ pipeline {
 				
 				bat 'docker push shihaji/springjenkins:latest'
 			}
+		}
+		
+		stage('Deploy to kubernates'){
+			steps {
+				
+				withKubeConfig([credentialsId: 'kuberConfig-cred']){
+					
+					bat 'kubectl apply -f k8s/service.yaml'
+					bat 'kubectl apply -f k8s/deployment.yaml'
+					bat 'kubectl set image deployment/springjenkins-deployment springjenkins= shihaji/springjenkins:latest'
+					bat 'kubectl rollout status deployment/springjenkins-deployment'
+					
+				}
+				
+			}
+			
 		}	
 	}
 	

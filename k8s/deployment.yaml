@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+   name: springjenkins-deployment
+   
+spec:
+   replicas: 3
+   selector:
+      matchLabels:
+         app: springjenkins
+         
+   template:
+      metadata:
+         labels:
+            app: springjenkins
+      spec:
+         containers:
+         - name: springjenkins
+           image: shihaji/springjenkins:latest
+           ports:
+           - containerPort: 8085               
