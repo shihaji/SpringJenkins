@@ -7,6 +7,15 @@ pipeline {
 		stage('Build'){
 		
 			steps {
+				bat 'mvn clean package'
+			}
+			
+		}
+		
+		stage('Build Docker image'){
+			
+			steps{
+				
 				bat 'docker build -t shihaji/springjenkins:latest .'
 			}
 			
