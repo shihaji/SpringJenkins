@@ -44,7 +44,7 @@ pipeline {
 		stage('Deploy to kubernates'){
 			steps {
 				
-				withKubeConfig([credentialsId: 'kuberConfig-cred']){
+				withKubeConfig([credentialsId: 'kubeconfig-cred']){
 					
 					bat 'kubectl apply -f k8s/service.yaml'
 					bat 'kubectl apply -f k8s/deployment.yaml'
